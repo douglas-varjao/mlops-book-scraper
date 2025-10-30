@@ -1,7 +1,27 @@
-uvicorn
-requests
-beautifulsoup4
-lxml
+# FastAPI e Servidor
+fastapi
+uvicorn[standard]
+gunicorn
+
+# ORM e Migrações
+sqlalchemy
+alembic
+psycopg2-binary # Driver Postgres
+
+# Dados e Scripts
 pandas
+python-dotenv
+
+# Autenticação e Segurança
+passlib[bcrypt]
+python-jose[cryptography]
+pydantic[email]
+
+# Monitoramento e Dashboard
+prometheus-fastapi-instrumentator
 streamlit
-matplotlib
+
+# Testes
+pytest
+pytest-cov
+httpx

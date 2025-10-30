@@ -1,0 +1,10 @@
+# Ambiente virtual
+venv/
+.venv/
+
+# Arquivo de segredos
+.env
+
+# Banco de dados local
+local.db
+*.db
