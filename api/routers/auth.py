@@ -12,7 +12,7 @@ from api.security import(
     get_current_admin_user
 )
 
-from scripts.load_to_db import pupulate_initial_admin
+from scripts.load_to_db import populate_database
 
 router = APIRouter(
     prefix="/api/v1",
@@ -47,7 +47,7 @@ def trigger_data_load(
 ):
     """[ADMIN] Triggers the loading of data from 'books.csv' into the database.
 Runs in the background to avoid blocking the API."""
-    background_tasks.add_task(populate_initial_admin, overwrite=overwrite)
+    background_tasks.add_task(populate_database, overwrite=overwrite)
 
     return{"message": "Data loading process initiated in the background.",
            "admin_user": current_admin.username,

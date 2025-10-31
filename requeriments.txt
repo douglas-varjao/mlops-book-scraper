@@ -2,6 +2,7 @@
 fastapi
 uvicorn[standard]
 gunicorn
+python-multipart
 
 # ORM e Migrações
 sqlalchemy

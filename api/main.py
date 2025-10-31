@@ -3,23 +3,18 @@ from api.routers import health, books, stats, auth, ml
 from contextlib import asynccontextmanager
 from prometheus_fastapi_instrumentator import Instrumentator
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    Instrumentator().instrument(app).expose(app)
-    print("INFO: Prometheus instrumentation tool activated.")
-    yield
-    print("INFO: Application closed.")
 
 app = FastAPI(
-    title="",
-    description="",
+    title="Public Book API - Tech Challenge",
+    description="Projeto da Fase 1 da Pós-Tech em ML Engineering. API para consulta de livros, com endpoints de ML e autenticação.",
     version="1.0.0",
     contact={"name":"Douglas Varjão",
     "url":"https://github.com/douglas-varjao",
     "email":"study.viniciusvarjao@gmail.com",
     },
-    lifespan=lifespan
 )
+
+Instrumentator().instrument(app).expose(app)
 
 
 app.include_router(health.router)
