@@ -37,9 +37,13 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    """Dependecy to obtain the current user from the JWT token."""
-    credential_exception = HTTPException(
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    """Dependência para obter o usuário atual a partir do token."""
+    from api import crud # <-- ADICIONE A LINHA AQUI
+    
+    credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
@@ -51,11 +55,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
             raise credential_exception
         token_data = username
     except JWTError:
-        raise credential_exception
+        raise credentials_exception
     
     user = crud.get_user_by_username(db, username=token_data)
     if user is None:
-        raise credential_exception
+        raise credentials_exception
     return user
 
 async def get_current_admin_user(current_user: models.User = Depends(get_current_user)):
