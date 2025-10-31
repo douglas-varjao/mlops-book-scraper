@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func, desc, or_, and_
 from api import models, schemas
 from typing import List, Optional
-from api.security import get_password_hash
+
 
 def get_book_id(db: Session, book_id: int):
     return db.query(models.Book).filter(models.Book.id == book_id).first()
@@ -82,6 +82,7 @@ def get_user_by_username(db: Session, username: str):
     return db.query(models.User).filter(models.User.username == username).first()
 
 def create_user(db:Session, user: schemas.UserCreate):
+    from api.security import get_password_hash
     hashed_password = get_password_hash(user.password)
     db_user = models.User(
         username = user.username,

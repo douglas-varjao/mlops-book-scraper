@@ -1,13 +1,20 @@
 import pandas as pd
 import logging
 import os
+import sys
+
+BASE_DIR = BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+sys.path.append(BASE_DIR)
+
 from api.database import SessionLocal, engine
 from api.models import Base, Book
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-FINAL_CSV_PATH = "data/final_books.csv"
+FINAL_CSV_PATH = os.path.join(BASE_DIR, "data", "books.csv")
 
 def populate_database(overwrite: bool = False):
     Base.metadata.create_all(bind=engine)
@@ -42,6 +49,11 @@ def populate_database(overwrite: bool = False):
             logger.info("Existing data cleared.")
         
         logger.info("Populating database with data from CSV...")
+
+        if 'id' in df.columns:
+            logger.warning("Coluna 'id' encontrada no CSV. Removendo...")
+            df = df.drop(columns=['id'])
+
         books_data = df.to_dict(orient="records")
 
         db.bulk_insert_mappings(Book, books_data)
@@ -53,3 +65,8 @@ def populate_database(overwrite: bool = False):
         db.rollback()
     finally:
         db.close()
+
+if __name__ == "__main__":
+
+    do_overwrite = "overwrite" in sys.argv
+    populate_database(overwrite=do_overwrite)

@@ -16,6 +16,47 @@ def read_books(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     books = crud.get_books(db, skip=skip, limit=limit)
     return books
 
+@router.get("/books/search", response_model=List[schemas.Book])
+def search_books(
+    # 2. Removemos o 'min_length' da validação automática
+    title: Optional[str] = Query(None, description="Busca por título (parcial)"),
+    category: Optional[str] = Query(None, description="Busca por categoria (parcial)"),
+    db: Session = Depends(get_db)
+):
+    """
+    Busca livros por título e/ou categoria.
+    """
+    
+    # 3. Convertemos strings vazias "" para None
+    if title == "":
+        title = None
+    if category == "":
+        category = None
+
+    # 4. Verificamos se pelo menos um foi fornecido
+    if not title and not category:
+        raise HTTPException(
+            status_code=400, 
+            detail="Forneça ao menos um critério de busca (title ou category)"
+        )
+        
+    # 5. Fazemos a validação do min_length aqui dentro (muito mais robusto)
+    if title and len(title) < 3:
+        raise HTTPException(
+            status_code=422, 
+            detail="O 'title' deve ter pelo menos 3 caracteres"
+        )
+    if category and len(category) < 3:
+        raise HTTPException(
+            status_code=422, 
+            detail="A 'category' deve ter pelo menos 3 caracteres"
+        )
+        
+    books = crud.search_books(db, title=title, category=category)
+    if not books:
+        raise HTTPException(status_code=404, detail="Nenhum livro encontrado com esses critérios")
+    return books
+
 @router.get("/books/{book_id}", response_model=schemas.Book)
 def read_book(book_id: int, db: Session = Depends(get_db)):
     """Get a specific book by its ID"""
@@ -24,20 +65,7 @@ def read_book(book_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Book not found")
     return db_book
 
-@router.get("/books/search", response_model=List[schemas.Book])
-def search_books(
-    title: Optional[str] = Query(None, min_length=3, description="Search books by title"),
-    category: Optional[str] = Query(None, min_length=3, description="Search books by category"),
-    db: Session = Depends(get_db)
-):
-    """Search books by title or category"""
-    if not title and not category:
-        raise HTTPException(status_code=400, detail="Please provide at least a 'title' or 'category'.")
-    
-    books = crud.search_books(db, title=title, category=category)
-    if not books:
-        raise HTTPException(status_code=404, detail="No books found matching the criteria.")
-    return books
+
 
 @router.get("/categories", response_model=List[str])
 def get_categories(db: Session = Depends(get_db)):

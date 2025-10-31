@@ -48,13 +48,23 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
             price_text = re.sub(r"[^\d.]", "", price_text)
             price = float(price_text) if price_text else None
 
+            # ...
             rating = next((rating_map[c] for c in prod.p["class"] if c in rating_map), None)
-            availability = prod.select_one("p.instock.availability").text.strip()
+            
+            # Extrai o texto, ex: "In stock (22 available)"
+            availability_text = prod.select_one("p.instock.availability").text.strip()
+            
+            # Usa Regex para achar o número dentro dos parênteses
+            availability_match = re.search(r"\((\d+) available\)", availability_text)
+            
+            # Converte para int se achar, senão, 0
+            availability = int(availability_match.group(1)) if availability_match else 0
+            
             image_url = urljoin(site, prod.select_one("div.image_container img")["src"])
+            # ...
             product_url = urljoin(site, prod.h3.a["href"])
 
             books.append({
-                "id": book_id,
                 "title": title,
                 "price": price,
                 "rating": rating,
@@ -63,7 +73,6 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
                 "image_url": image_url,
                 "product_url": product_url
             })
-            book_id += 1
 
         next_link = soup.select_one("li.next a")
         next_url = urljoin(cat_url, next_link["href"]) if next_link else None
