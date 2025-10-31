@@ -16,7 +16,7 @@ router = APIRouter(
 @router.get("/features", response_model=List[schemas.MLFeatures])
 def get_ml_features(limit: int = 1000, db: Session = Depends(get_db)):
     """[AUTH] Returns data formatted as 'features' for ML models."""
-    return crud.get_ml_training_data(db, limit=limit)
+    return crud.get_ml_features(db, limit=limit)
 
 @router.get("/training-data", response_model=List[schemas.Book])
 def get_ml_training_data(limit: int = 1000, db: Session = Depends(get_db)):

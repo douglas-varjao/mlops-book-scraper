@@ -65,17 +65,17 @@ def get_stats_categories(db: Session) -> List[schemas.CategoryStats]:
 def get_top_rated_books(db: Session, limit: int = 10):
     return db.query(models.Book).order_by(desc(models.Book.rating)).limit(limit).all()
 
-def get_get_books_by_price_range(db: Session, min_price: float, max_price: float, limit: int = 100):
+def get_books_by_price_range(db: Session, min_price: float, max_price: float, limit: int = 100):
     return db.query(models.Book).filter(
         models.Book.price.between(min_price, max_price)
-        ).ordey_by(models.Book.price).limit(limit).all()
+        ).order_by(models.Book.price).limit(limit).all()
 
 #------------------------------------------------------------------------------------------------------#
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
-def get_user_by_username(db: Session, email: str):
+def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
 def get_user_by_username(db: Session, username: str):

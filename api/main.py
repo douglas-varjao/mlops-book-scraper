@@ -18,10 +18,8 @@ Instrumentator().instrument(app).expose(app)
 
 
 app.include_router(health.router)
-app.include_router(books.router)
-
 app.include_router(stats.router)
-
+app.include_router(books.router)
 app.include_router(auth.router)
 app.include_router(ml.router)
 
