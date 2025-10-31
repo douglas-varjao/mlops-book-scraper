@@ -14,11 +14,11 @@ class BookBase(BaseModel):
 class BookCreate(BookBase):
     pass
 
-class BookUpdate(BaseModel):
+class Book(BookBase):
     id: int
     created_at: datetime
 
-    class config:
+    class Config:
         orm_mode = True
 
 class UserBase(BaseModel):
