@@ -54,7 +54,7 @@ def load_data(_engine):
         with _engine.connect() as conn:
             query = "SELECT title, price, rating, availability, category FROM books"
             df = pd.read_sql(query, conn)
-        logger.info(f"Dados carregados com sucesso: {len(df)} linhas.")
+        logger.info(f"Data loaded successfully: {len(df)} rows.")
         return df
     except Exception as e:
         logger.error(f"Error loading data (table 'books' may not exist):{e}")
@@ -66,7 +66,7 @@ st.title("📚 Books API Metrics Dashboard")
 
 if df.empty:
     st.warning("No data loaded. Is the database empty?")
-    st.warning("Se esta for a primeira execução local, rode: `python scripts/load_to_db.py`")
+    st.warning("If this is the first local execution, run: `python scripts/load_to_db.py`")
 else:
     st.markdown(f"Analysis of **{len(df)}** books in the database.")
 
@@ -92,7 +92,7 @@ else:
     with col_left:
         #Price
         st.subheader("Price Distribution")
-        fig_price = px.histogram(df, x='price', nbins=50, title="Frequência por Faixa de Preço")
+        fig_price = px.histogram(df, x='price', nbins=50, title="Frequency by Price Range")
         fig_price.update_layout(xaxis_title= "Preço (£)")
         st.plotly_chart(fig_price, use_container_width=True)
 

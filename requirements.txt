@@ -1,28 +1,26 @@
-# FastAPI e Servidor
+#api
 fastapi
 uvicorn[standard]
 gunicorn
 python-multipart
 
-# ORM e Migrações
+#orm
 sqlalchemy
 alembic
-psycopg2-binary # Driver Postgres
+psycopg2-binary
 
-# Dados e Scripts
+#data
 pandas
 python-dotenv
 
-# Autenticação e Segurança
+#auth
 passlib[bcrypt]
 python-jose[cryptography]
 pydantic[email]
 
-# Monitoramento e Dashboard
+#dash
 prometheus-fastapi-instrumentator
 streamlit
 
-# Testes
-pytest
-pytest-cov
-httpx
+passlib
+bcrypt<4.0

@@ -18,43 +18,38 @@ def read_books(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @router.get("/books/search", response_model=List[schemas.Book])
 def search_books(
-    # 2. Removemos o 'min_length' da validação automática
-    title: Optional[str] = Query(None, description="Busca por título (parcial)"),
-    category: Optional[str] = Query(None, description="Busca por categoria (parcial)"),
+
+    title: Optional[str] = Query(None, description="Search by title (partial)"),
+    category: Optional[str] = Query(None, description="Search by category (partial)"),
     db: Session = Depends(get_db)
 ):
-    """
-    Busca livros por título e/ou categoria.
-    """
+    """Search for books by title and/or category."""
     
-    # 3. Convertemos strings vazias "" para None
     if title == "":
         title = None
     if category == "":
         category = None
 
-    # 4. Verificamos se pelo menos um foi fornecido
     if not title and not category:
         raise HTTPException(
             status_code=400, 
-            detail="Forneça ao menos um critério de busca (title ou category)"
+            detail="Please provide at least one search criterion (title or category)."
         )
         
-    # 5. Fazemos a validação do min_length aqui dentro (muito mais robusto)
     if title and len(title) < 3:
         raise HTTPException(
             status_code=422, 
-            detail="O 'title' deve ter pelo menos 3 caracteres"
+            detail="The 'title' must be at least 3 characters long."
         )
     if category and len(category) < 3:
         raise HTTPException(
             status_code=422, 
-            detail="A 'category' deve ter pelo menos 3 caracteres"
+            detail="The 'category' must have at least 3 characters."
         )
         
     books = crud.search_books(db, title=title, category=category)
     if not books:
-        raise HTTPException(status_code=404, detail="Nenhum livro encontrado com esses critérios")
+        raise HTTPException(status_code=404, detail="No books were found that matched these criteria.")
     return books
 
 @router.get("/books/{book_id}", response_model=schemas.Book)

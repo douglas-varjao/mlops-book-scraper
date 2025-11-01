@@ -51,7 +51,7 @@ def populate_database(overwrite: bool = False):
         logger.info("Populating database with data from CSV...")
 
         if 'id' in df.columns:
-            logger.warning("Coluna 'id' encontrada no CSV. Removendo...")
+            logger.warning("Column 'id' found in CSV. Removing it.")
             df = df.drop(columns=['id'])
 
         books_data = df.to_dict(orient="records")

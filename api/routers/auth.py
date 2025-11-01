@@ -19,6 +19,7 @@ router = APIRouter(
     tags=["Autentication & Admin (Bonus)"]
 )
 
+
 @router.post("/auth/login", response_model=schemas.Token)
 def login_for_access_token(
     db: Session = Depends(get_db),
@@ -39,6 +40,7 @@ def login_for_access_token(
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
+
 @router.post("/scraping/trigger", status_code=status.HTTP_202_ACCEPTED)
 def trigger_data_load(
     background_tasks: BackgroundTasks,
@@ -52,6 +54,8 @@ Runs in the background to avoid blocking the API."""
     return{"message": "Data loading process initiated in the background.",
            "admin_user": current_admin.username,
            "overwrite": overwrite}
+
+
 @router.post("/auth/register", response_model=schemas.User, status_code=status.HTTP_201_CREATED)
 def register_new_user(
     user_data: schemas.UserCreate, 

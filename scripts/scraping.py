@@ -6,17 +6,13 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-#--------------------------------------------#
-#              CONFIGURAÇÕES                 #
-#--------------------------------------------#
+
 
 site = "https://books.toscrape.com/"
 headers = {"User-Agent": "Mozilla/5.0 (compatible; TechChallengeScraper/1.0)"}
 rating_map = {"One": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5}
 
-#--------------------------------------------#
-#                FUNÇÕES BASE                #
-#--------------------------------------------#
+
 
 def get_soup(url: str) -> BeautifulSoup:
     response = requests.get(url, headers=headers, timeout=30)
@@ -43,25 +39,25 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
         for prod in products:
             title = prod.h3.a.get("title").strip()
 
-            # limpar o preço
+
             price_text = prod.select_one("p.price_color").text.strip()
             price_text = re.sub(r"[^\d.]", "", price_text)
             price = float(price_text) if price_text else None
 
-            # ...
+
             rating = next((rating_map[c] for c in prod.p["class"] if c in rating_map), None)
             
-            # Extrai o texto, ex: "In stock (22 available)"
+
             availability_text = prod.select_one("p.instock.availability").text.strip()
             
-            # Usa Regex para achar o número dentro dos parênteses
+
             availability_match = re.search(r"\((\d+) available\)", availability_text)
             
-            # Converte para int se achar, senão, 0
+
             availability = int(availability_match.group(1)) if availability_match else 0
             
             image_url = urljoin(site, prod.select_one("div.image_container img")["src"])
-            # ...
+
             product_url = urljoin(site, prod.h3.a["href"])
 
             books.append({
@@ -79,9 +75,7 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
 
     return books, book_id
 
-#--------------------------------------------#
-#                EXECUÇÃO                    #
-#--------------------------------------------#
+
 
 def run(out_path: str):
     categories = extract_categories()
@@ -99,9 +93,7 @@ def run(out_path: str):
 
     print(f"\n✅ Scraping completed. Data saved to {out_path}\n")
 
-#--------------------------------------------#
-#                 ENTRADA                    #
-#--------------------------------------------#
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Book Scraper")

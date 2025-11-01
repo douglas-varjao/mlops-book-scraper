@@ -116,6 +116,7 @@ def get_ml_features(db: Session, limit: int = 1000) -> List[schemas.MLFeatures]:
     ]
     return features
 
+
 def get_ml_training_data(db: Session, limit: int = 1000):
     """Returns raw data for ML training."""
     return db.query(models.Book).limit(limit).all()

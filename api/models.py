@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, DateTime, Boolean
 from sqlalchemy.sql import func
 from api.database import Base
 
+
 class Book(Base):
     __tablename__ = "books"
 
@@ -14,6 +15,7 @@ class Book(Base):
     image_url = Column(String)
     product_url = Column(String, unique=True, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
 
 class User(Base):
     __tablename__ = "users"

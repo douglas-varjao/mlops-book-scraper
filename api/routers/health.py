@@ -10,6 +10,7 @@ router = APIRouter(
     tags=["Health Check"]
 )
 
+
 @router.get("", response_model=schemas.HealthCheck)
 def health_check(db: Session = Depends(get_db)):
     """health check endpoint to verify API is running"""

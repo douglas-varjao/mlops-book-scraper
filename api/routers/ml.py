@@ -13,15 +13,18 @@ router = APIRouter(
     dependencies=[Depends(get_current_admin_user)]
 )
 
+
 @router.get("/features", response_model=List[schemas.MLFeatures])
 def get_ml_features(limit: int = 1000, db: Session = Depends(get_db)):
     """[AUTH] Returns data formatted as 'features' for ML models."""
     return crud.get_ml_features(db, limit=limit)
 
+
 @router.get("/training-data", response_model=List[schemas.Book])
 def get_ml_training_data(limit: int = 1000, db: Session = Depends(get_db)):
     """[AUTH] Returns the 'raw' dataset for model training."""
     return crud.get_ml_training_data(db, limit=limit)
+
 
 @router.post("/predictions", response_model=schemas.MLPredictionResponse)
 def get_mock_prediction(request: schemas.MLPredictionRequest):

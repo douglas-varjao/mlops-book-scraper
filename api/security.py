@@ -40,8 +40,8 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 async def get_current_user(
     token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
-    """Dependência para obter o usuário atual a partir do token."""
-    from api import crud # <-- ADICIONE A LINHA AQUI
+    """Dependency to obtain the current user from the token."""
+    from api import crud
     
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

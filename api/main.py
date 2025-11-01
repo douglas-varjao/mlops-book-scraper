@@ -6,7 +6,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(
     title="Public Book API - Tech Challenge",
-    description="Projeto da Fase 1 da Pós-Tech em ML Engineering. API para consulta de livros, com endpoints de ML e autenticação.",
+    description="Project of the Post-Tech course in ML Engineering. API for querying books, with ML endpoints and authentication.",
     version="1.0.0",
     contact={"name":"Douglas Varjão",
     "url":"https://github.com/douglas-varjao",
