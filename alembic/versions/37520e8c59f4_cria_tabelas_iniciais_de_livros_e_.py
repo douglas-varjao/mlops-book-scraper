@@ -1,4 +1,4 @@
-"""Cria tabelas iniciais de livros e usuários
+"""Creates initial tables of books and users.
 
 Revision ID: 37520e8c59f4
 Revises: 

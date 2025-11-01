@@ -9,7 +9,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
-from api import models # <--- ADICIONE ESTA LINHA
+from api import models
 
 # revision identifiers, used by Alembic.
 revision: str = '${up_revision}'
