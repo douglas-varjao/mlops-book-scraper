@@ -8,10 +8,10 @@ Esta solução inclui a API (FastAPI), um banco de dados (Postgres), um dashboar
 
 ## 🚀 Links do Projeto (Entregáveis)
 
-* **API (Render):** `<COLE_AQUI_O_LINK_DO_DEPLOY_DA_API>` 
-* **Dashboard (Render):** `<COLE_AQUI_O_LINK_DO_DEPLOY_DO_DASHBOARD>`
+* **API (Render):** `https://tech-challenge-api-dd10.onrender.com` 
+* **Dashboard (Render):** `https://tech-challenge-dashboard-fnzi.onrender.com`
 * **Vídeo de Apresentação:** `<COLE_AQUI_O_LINK_DO_VÍDEO>` 
-* **Certificado Bônus (Google Cloud):** `<COLE_AQUI_O_LINK_PÚBLICO_DO_SEU_BADGE>`
+* **Certificado Bônus (Google Cloud):** `https://www.skills.google/public_profiles/181dd1d9-f71d-44a1-8a6e-476211f1bf57`
 
 ---
 
@@ -56,15 +56,15 @@ graph TD
 
 ## ✨ Features Implementadas
 
-* **API RESTful (FastAPI):** Endpoints robustos para consulta, busca e estatísticas[cite: 27, 28].
+* **API RESTful (FastAPI):** Endpoints robustos para consulta, busca e estatísticas.
 * **Banco de Dados (Postgres):** Banco de dados relacional e escalável para produção (e SQLite para desenvolvimento local).
 * **Migrações (Alembic):** Versionamento e gerenciamento profissional do schema do banco de dados.
-* **Endpoints Core:** `GET /books`, `GET /books/{id}`, `GET /books/search`, `GET /categories`, `GET /health`[cite: 55, 57, 58, 59, 60].
-* **Endpoints Opcionais:** `GET /stats/overview`, `GET /stats/categories`, `GET /books/top-rated`, `GET /books/price-range`[cite: 63, 64, 67, 68].
-* **Endpoints Bônus (Segurança):** Autenticação `JWT` (`/auth/login`) [cite: 71, 74] e rota de admin protegida (`/scraping/trigger`)[cite: 76].
-* **Endpoints Bônus (ML-Ready):** Rotas `/ml/features` e `/ml/training-data` para consumo direto por modelos de ML[cite: 79, 80].
-* **Monitoramento (Streamlit):** Dashboard interativo para análise das métricas da base de dados[cite: 84].
-* **Deploy (Render):** Infraestrutura como Código (`render.yaml`) para deploy automatizado e contínuo[cite: 31, 32].
+* **Endpoints Core:** `GET /books`, `GET /books/{id}`, `GET /books/search`, `GET /categories`, `GET /health`.
+* **Endpoints Opcionais:** `GET /stats/overview`, `GET /stats/categories`, `GET /books/top-rated`, `GET /books/price-range`.
+* **Endpoints Bônus (Segurança):** Autenticação `JWT` (`/auth/login`) e rota de admin protegida (`/scraping/trigger`)
+* **Endpoints Bônus (ML-Ready):** Rotas `/ml/features` e `/ml/training-data` para consumo direto por modelos de ML.
+* **Monitoramento (Streamlit):** Dashboard interativo para análise das métricas da base de dados.
+* **Deploy (Render):** Infraestrutura como Código (`render.yaml`) para deploy automatizado e contínuo.
 
 ---
 
@@ -86,7 +86,7 @@ Siga os passos abaixo para executar o projeto na sua máquina.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/douglas-varjao/mlops-book-scraper.git](https://github.com/douglas-varjao/mlops-book-scraper.git)
+    git clone https://github.com/douglas-varjao/mlops-book-scraper.git
     cd mlops-book-scraper
     ```
 
