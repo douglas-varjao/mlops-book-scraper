@@ -8,11 +8,10 @@ Esta solução inclui a API (FastAPI), um banco de dados (Postgres), um dashboar
 
 ## 🚀 Links do Projeto (Entregáveis)
 
-* **API (Render):** `https://tech-challenge-api-dd10.onrender.com` 
-* **Dashboard (Render):** `https://tech-challenge-dashboard-fnzi.onrender.com`
-* **Vídeo de Apresentação:** `<COLE_AQUI_O_LINK_DO_VÍDEO>` 
-* **Certificado Bônus (Google Cloud):** `https://www.skills.google/public_profiles/181dd1d9-f71d-44a1-8a6e-476211f1bf57`
-
+* **API (Render):** [https://tech-challenge-api-dd10.onrender.com](https://tech-challenge-api-dd10.onrender.com)
+* **Dashboard (Render):** [https://tech-challenge-dashboard-fnzi.onrender.com](https://tech-challenge-dashboard-fnzi.onrender.com)
+* **Vídeo de Apresentação:** `<PENDENTE>` 
+* **Certificado Bônus (Google Cloud):** [https://www.skills.google/public_profiles/181dd1d9-f71d-44a1-8a6e-476211f1bf57](https://www.skills.google/public_profiles/181dd1d9-f71d-44a1-8a6e-476211f1bf57)
 ---
 
 ## 🏛️ Diagrama da Arquitetura
