@@ -3,3 +3,4 @@ sqlalchemy
 pandas
 plotly
 python-dotenv
+psycopg2-binary

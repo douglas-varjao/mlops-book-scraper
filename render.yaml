@@ -9,14 +9,13 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       
-      # 1. Cria as tabelas (books, users) no banco Postgres
+
       alembic upgrade head
       
-      # 2. Cria o usuário 'admin' lendo do .env
+
       python scripts/create_admin.py
       
-      # 3. POPULA O BANCO AUTOMATICAMENTE
-      # (Lê o seu 'data/books.csv' e o insere no Postgres)
+
       python scripts/load_to_db.py
 
     startCommand: gunicorn api.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:10000
@@ -26,16 +25,14 @@ services:
         value: production
       - key: DATABASE_URL
         fromDatabase:
-          name: books-db
+          name: books-db 
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
-      - key: INIT_ADMIN_USERNAME
-        value: "admin"
-      - key: INIT_ADMIN_EMAIL
-        value: "admin@example.com"
-      - key: INIT_ADMIN_PASSWORD
-        value: "SenhaForte123" 
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 30
 
   # --- Dashboard Streamlit ---
   - type: web
