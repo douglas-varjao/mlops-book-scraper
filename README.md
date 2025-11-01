@@ -148,7 +148,7 @@ Siga os passos abaixo para executar o projeto na sua máquina.
 
 ---
 
-##↔️ Documentação dos Endpoints (Exemplos)
+## ↔️ Documentação dos Endpoints (Exemplos)
 
 Use `curl` ou o `/docs` interativo para testar os endpoints.
 
