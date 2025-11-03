@@ -39,26 +39,23 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
         for prod in products:
             title = prod.h3.a.get("title").strip()
 
-
             price_text = prod.select_one("p.price_color").text.strip()
             price_text = re.sub(r"[^\d.]", "", price_text)
             price = float(price_text) if price_text else None
 
-
             rating = next((rating_map[c] for c in prod.p["class"] if c in rating_map), None)
-            
 
-            availability_text = prod.select_one("p.instock.availability").text.strip()
-            
+
+            product_url = urljoin(cat_url, prod.h3.a["href"])
+
+
+            product_soup = get_soup(product_url)
+            availability_text = product_soup.select_one("p.instock.availability").text.strip()
 
             availability_match = re.search(r"\((\d+) available\)", availability_text)
-            
-
             availability = int(availability_match.group(1)) if availability_match else 0
-            
-            image_url = urljoin(site, prod.select_one("div.image_container img")["src"])
 
-            product_url = urljoin(site, prod.h3.a["href"])
+            image_url = urljoin(site, prod.select_one("div.image_container img")["src"])
 
             books.append({
                 "title": title,
@@ -74,7 +71,6 @@ def extract_books_from_category(cat_name: str, cat_url: str, start_id: int = 1) 
         next_url = urljoin(cat_url, next_link["href"]) if next_link else None
 
     return books, book_id
-
 
 
 def run(out_path: str):
