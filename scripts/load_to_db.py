@@ -3,12 +3,14 @@ import logging
 import os
 import sys
 
-BASE_DIR = BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
 
 sys.path.append(BASE_DIR)
 
 from api.database import SessionLocal, engine
 from api.models import Base, Book
+from sqlalchemy import text
 
 
 logging.basicConfig(level=logging.INFO)
@@ -44,7 +46,7 @@ def populate_database(overwrite: bool = False):
         
         if overwrite:
             logger.info("Overwriting mode enabled. Clearing existing data.")
-            db.query(Book).delete()
+            db.execute(text("TRUNCATE TABLE books RESTART IDENTITY;"))
             db.commit()
             logger.info("Existing data cleared.")
         
