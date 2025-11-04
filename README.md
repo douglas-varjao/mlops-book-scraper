@@ -9,7 +9,7 @@ Esta solução inclui a API (FastAPI), um banco de dados (Postgres), um dashboar
 
 * **API (Render):** [Acessar API](https://tech-challenge-api-dd10.onrender.com)
 * **Dashboard (Render):** [Acessar Dashboard](https://tech-challenge-dashboard-fnzi.onrender.com)
-* **Vídeo de Apresentação:** `<PENDENTE>` 
+* **Vídeo de Apresentação:** [Assistir a apresentação](https://www.youtube.com/watch?v=Tf4OUFVgEoA)
 * **Certificado Bônus (Google Cloud):** [Ver Certificado](https://www.skills.google/public_profiles/181dd1d9-f71d-44a1-8a6e-476211f1bf57)
 ---
 
